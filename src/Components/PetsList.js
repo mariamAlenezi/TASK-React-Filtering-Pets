@@ -1,8 +1,23 @@
+import { useState } from "react";
 import pets from "../petsData";
 import PetItem from "./PetItem";
 
 function PetsList() {
+  const [query, setQuery] = useState("");
+
   const petList = pets.map((pet) => <PetItem pet={pet} key={pet.id} />);
+
+  const handleSearch = (event) => {
+    setQuery(event.target.value);
+    console.log(event);
+  };
+
+  let newfilter = pets.filter((x) => {
+    if (x.name != query) {
+      return x;
+    }
+    return newfilter;
+  });
 
   return (
     <section id="doctors" className="doctor-section pt-140">
@@ -20,6 +35,7 @@ function PetsList() {
                   placeholder="Search"
                   aria-label="Search"
                   aria-describedby="search-addon"
+                  onChange={handleSearch}
                 />
               </div>
               <br />
